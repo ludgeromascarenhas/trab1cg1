@@ -57,7 +57,6 @@ void Desenha(void)
       }
     }
     
-    
     glEnd();
     
     //Executa os comandos OpenGL
@@ -73,12 +72,17 @@ void Cross(void){ // 2 ou mais pessoas com as mesmas coord e o mesmo frame
     
     for(int l=0;l<contpeople;l++){
         for(int c=0;c<contframes;c++){
-            if(abc [l][c].f == abc [l+1][c].f){
-                if(abc [l][c].x == abc [l+1][c].x && abc [l][c].y == abc [l+1][c].y){
+			for(int aux=l+1;aux<contpeople+1;aux++){//varrer as linhas de baixo
+				if(abc [l][c].f == abc [aux][c].f){
+					if(abc [l][c].x == abc [aux][c].x && abc [l][c].y == abc [aux][c].y){
                     //chama a funcao para plotar as trajetorias
-                    
+					for(int auxcoluna=0;auxcoluna<contframes;auxcoluna++){
+						glVertex2f(abc [l][auxcoluna].x,abc [l][auxcoluna].y);
+						glVertex2f(abc [aux][auxcoluna].x,abc [aux][auxcoluna].y);
+                    }
                 }
-            }
+			}
+         
         }
     }
     
